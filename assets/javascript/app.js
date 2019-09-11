@@ -21,6 +21,7 @@ function decrement() {
     if (number === 0) {
         stop();
         alert("Time's Up!");
+        $("#pageThree").show();
 
     }
 
@@ -32,37 +33,38 @@ function stop() {
 
 
 function startFunction() {
-    var x = document.getElementById("pageOne");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
+    $("#pageTwo").show();
+    $("#pageThree").hide();
+    $("#pageOne").hide();
+    $("#start").hide();
   }
 
 
 
+
+
 //these are the questions
+$("#pageTwo").hide();
   var triviaQuestions = [
     {
         question: "What's the largest Panda species in existance?",
         answer: {
-            // "Chinese",
-            // "Red",
-            // "Orange",
-            // "Leamur",
+            // a: "Chinese",
+            // b: "Red",
+            // c: "Orange",
+            // d: "Leamur",
         },
-        correctAnswer: "Chinese"
+        correctAnswer: "d"
     },
     {
         question: "What's the creepiest type of Reptile out there?",
         answer: {
-            // "Snake",
-            // "Gheko",
-            // "Shark",
-            // "Buffalo",
+            // a: "Snake",
+            // b: "Gheko",
+            // c: "Shark",
+            // d: "Buffalo",
         },
-        correctAnswer: "Snake"
+        correctAnswer: "a"
     },
 ];
 
