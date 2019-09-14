@@ -1,6 +1,9 @@
 //below is the countdown timer
-var number = 3;
+var number = 5;
 var intervalId;
+var selectedAnswers;
+
+var pageTwo = $("#pageTwo");
 
 $("#start").on("click", loadPageTwo);
 
@@ -20,12 +23,16 @@ function decrement() {
         stop();
         alert("Time's Up!");
         //testing out another show scenario. shows final page after questions are answered
-        $("#pageThree").show();
-        $("#countdown").hide();
+        // $("#pageThree").show();
+        // $("#countdown").hide();
+        selectedAnswers = $(pageTwo.children("input:checked"))
+        // need to use i to compare answers
+        // if (selectedAnswers===correctAnswer)
 
     }
 
 }
+// let $pageTwo= $("#pageTwo")[0]
 $("#pageTwo").html(triviaQuestions).hide();
 function stop() {
     clearInterval(intervalId);
@@ -34,11 +41,10 @@ function stop() {
 function loadPageTwo() {
   //show the questions and answers
     //on the pageTwo div, add paragraphs for each question
-    let $pageTwo= $("#pageTwo")[0]
-    console.log($pageTwo)
+    // let $pageTwo= $("#pageTwo")[0]
     
     for (var i=0; i<triviaQuestions.length; i++){
-      displayQuestion(triviaQuestions[i], $pageTwo)
+      displayQuestion(triviaQuestions[i])
     }
     //on each paragraph, add radio button answers for each question
   //show timer
@@ -92,28 +98,27 @@ function startFunction() {
     function displayQuestion(question, triviaContainer){ 
       // console.log("trying it out")
       // console.log(question)
-      console.log(triviaContainer)
-      let paragraph = $("<p>").text('test');
+      // console.log(triviaContainer)
+      // let paragraph = $("<p>").text('test');
       // paragraph.text("taco")
-      console.log(paragraph)
-      triviaContainer.append(paragraph);
+      // console.log(paragraph)
+      // $pageTwo.append(paragraph);
       // var output = [];
       // var answers = [];
   
   
       //setting up each question and adding pushes for the answers
-  //     for(var i=0; i<question.length; i++){
-  //         // answers = []
-  
-  //         for (var i=0; i<answers.length; i++){
-  //             answers.push(
-  //             '<input type="radio" name="answers" value="answers"></input>'
-  //                 // questions[i].answers[i]
+      for(var i=0; i<triviaQuestions.length; i++){
+          pageTwo.append("<p>" + triviaQuestions[i].question + "</p>")
+          for (var j=0; j<triviaQuestions[i].answers.length; j++){
+              pageTwo.append(
+              '<input type="radio" name="answers-'+ i + '"value="' + triviaQuestions[i].answers[j] + '">'+triviaQuestions[i].answers[j]
+                  // questions[i].answers[j]
                   
-  //             );
-  //         }
-  // console.log(answers);
-  //       };
+              );
+          }
+
+        };
 
 
     }
