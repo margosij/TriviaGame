@@ -1,7 +1,10 @@
 //below is the countdown timer
-var number = 5;
+var number = 7;
 var intervalId;
 var selectedAnswers;
+
+var correct = 0;
+var wrong = 0;
 
 var pageTwo = $("#pageTwo");
 
@@ -27,6 +30,19 @@ function decrement() {
         // $("#countdown").hide();
         selectedAnswers = $(pageTwo.children("input:checked"))
         // need to use i to compare answers
+        for(var i=0; i<selectedAnswers.length; i++){
+          console.log(selectedAnswers[i].value);
+          console.log(triviaQuestions[i].correctAnswer);
+            if(selectedAnswers[i].value===triviaQuestions[i].correctAnswer){
+                console.log("correct answer");
+                correct++;
+                console.log(correct);
+            }
+            else{
+              wrong++;
+              console.log(wrong);
+            }
+        }
         // if (selectedAnswers===correctAnswer)
 
     }
@@ -46,8 +62,7 @@ function loadPageTwo() {
     for (var i=0; i<triviaQuestions.length; i++){
       displayQuestion(triviaQuestions[i])
     }
-    //on each paragraph, add radio button answers for each question
-  //show timer
+
   run()
 }
 //testing out the hide/show functions based on various scenarios
