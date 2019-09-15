@@ -1,5 +1,5 @@
 //below is the countdown timer
-var number = 7;
+var number = 30;
 var intervalId;
 var selectedAnswers;
 
@@ -8,7 +8,7 @@ var wrong = 0;
 
 var pageTwo = $("#pageTwo");
 
-$("#start").on("click", loadPageTwo);
+$("#start").on("click", loadPageTwo, run);
 
 function run() {
     clearInterval(intervalId);
@@ -25,47 +25,41 @@ function decrement() {
     if (number === 0) {
         stop();
         alert("Time's Up!");
-        //testing out another show scenario. shows final page after questions are answered
-        // $("#pageThree").show();
-        // $("#countdown").hide();
+        $("#right").text("Answers right: " + correct).show();
+        $("#incorrect").text("Wrong answers: " + wrong).show();
+        $("#countdown").hide();
+        $("#pageTwo").hide();
         selectedAnswers = $(pageTwo.children("input:checked"))
-        // need to use i to compare answers
+
         for(var i=0; i<selectedAnswers.length; i++){
-          console.log(selectedAnswers[i].value);
-          console.log(triviaQuestions[i].correctAnswer);
             if(selectedAnswers[i].value===triviaQuestions[i].correctAnswer){
-                console.log("correct answer");
                 correct++;
-                console.log(correct);
+                $("#right").text("Answers right: " + correct)
             }
             else{
               wrong++;
-              console.log(wrong);
+              $("#incorrect").text("Wrong answers: " + wrong)
             }
         }
-        // if (selectedAnswers===correctAnswer)
 
     }
 
 }
-// let $pageTwo= $("#pageTwo")[0]
 $("#pageTwo").html(triviaQuestions).hide();
 function stop() {
     clearInterval(intervalId);
   };
 //loadPageTwo function
 function loadPageTwo() {
-  //show the questions and answers
-    //on the pageTwo div, add paragraphs for each question
-    // let $pageTwo= $("#pageTwo")[0]
+
+  
     
     for (var i=0; i<triviaQuestions.length; i++){
       displayQuestion(triviaQuestions[i])
     }
 
-  run()
 }
-//testing out the hide/show functions based on various scenarios
+
 function startFunction() {
     $("#pageTwo").show();
     $("#pageThree").hide();
@@ -106,50 +100,14 @@ function startFunction() {
         correctAnswer: "2001"
     },
 ];
-
-
-
-// function Trivia(questions, triviaContainer, resultsContainer){
-    function displayQuestion(question, triviaContainer){ 
-      // console.log("trying it out")
-      // console.log(question)
-      // console.log(triviaContainer)
-      // let paragraph = $("<p>").text('test');
-      // paragraph.text("taco")
-      // console.log(paragraph)
-      // $pageTwo.append(paragraph);
-      // var output = [];
-      // var answers = [];
-  
-  
       //setting up each question and adding pushes for the answers
       for(var i=0; i<triviaQuestions.length; i++){
           pageTwo.append("<p>" + triviaQuestions[i].question + "</p>")
           for (var j=0; j<triviaQuestions[i].answers.length; j++){
               pageTwo.append(
               '<input type="radio" name="answers-'+ i + '"value="' + triviaQuestions[i].answers[j] + '">'+triviaQuestions[i].answers[j]
-                  // questions[i].answers[j]
                   
               );
           }
 
         };
-
-
-    }
-
-    function displayResults(questions, triviaContainer, resultsContainer){
-
-    };
-
-    // output.push(
-    //        <div class="question">questions[i].question</div>
-    //         <div class="answers">answers.join("")</div>
-
-    // triviaContainer.innerHTML = output.join("")
-
-    //)
-
-
-//compare whatever answer was clicked on, compare the value of the radio button to the actual answer of the question
-//how do you get the value of the radio button?
